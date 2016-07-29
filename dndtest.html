@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dnd</title>
+
+<script type="text/javascript" src="../js/dndmt.js"></script>
+
+
+
+<script type="text/javascript">
+    function init() {
+        var a = document.getElementsByClassName("drag")[0];
+        d = new dnd(a.parentNode);
+        d.settings
+        
+        d.on("drag", "drag", function(e) {
+            //                     console.log("draggggggggg");
+        });
+
+        d.on("drop", "drop", function(e) {
+            //                     console.log("droppppppp");
+            //                     console.log(e);
+        });
+
+        d.on("dropover", "drop", function(e) {
+            //                     console.log("droppppppp-overrr");
+            //                     console.log(e);
+        });
+
+        d.on("dropout", "drop", function(e) {
+            //                     console.log("dropp-outttt");
+            //                     console.log(e);
+        });
+
+        d.settings.tolerance = 1;
+        
+
+        //         $(".drag").draggable({
+        //             helper : 'clone',
+        //             refreshPositions : true,
+        //             start : function() {
+        //                 console.log("start")
+        //             },
+        //             stop : function() {
+        //                 console.log("stop");
+        //             }
+        //         });
+
+        //         $(".drop").droppable({
+        //             hoverClass : 'active',
+        //             over : function() {
+        //             }
+        //         });
+
+        var drops = document.querySelectorAll(".drop");
+        var count = drops.length;
+        setInterval(function() {
+
+            var randCount = count;//getRandomInt(0, count - 1);
+
+            var index = 0;
+            var deg = 360;
+
+            for (var i = index; i < randCount; i++) {
+                drops[i].style.top = getRandomInt(0, 50) * getRandomInt(-1, 1) + "px";
+                drops[i].style.left = getRandomInt(0, 50) * getRandomInt(-1, 1) + "px";
+
+            }
+
+        }, 700);
+
+    };
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+</script>
+
+<style type="text/css">
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.drag, .drop, .drip {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #666;
+    text-align: center;
+    line-height: 100px;
+    cursor: move;
+    position: relative;
+    box-shadow: 0 0 5px #bbb;
+    /*     border-radius: 50%; */
+}
+
+.drag {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+}
+
+.drop {
+    transition: all 0.8s linear;
+}
+
+.drip {
+    background-color: #f0f0f0;
+}
+
+div {
+    text-align: center;
+}
+
+.active {
+    background-color: #abcdef;
+}
+
+.dropped {
+    background-color: #00f00f;
+}
+
+.container {
+    position: relative;
+    top: 100px;
+    left: 40px;
+    display: inline-block;
+}
+</style>
+
+</head>
+<body>
+
+  <div class="container">
+    <div class="drag">drag</div>
+  </div>
+
+  <div style="position: absolute;
+    right: 0;
+    top: 0">
+    <div class="a"></div>
+    <div class="b"></div>
+    <div class="c"></div>
+  </div>
+
+
+  <script type="text/javascript">
+            var container = document.querySelector(".container");
+
+            function add() {
+                for (var i = 0; i < 100; i++) {
+                    var div = document.createElement("div");
+                    div.classList.add("drop");
+                    div.textContent = "drop";
+
+                    if (Math.floor(Math.random() * 2)) {
+                        div.classList.add("drip");
+                    }
+
+                    container.appendChild(div);
+                }
+            };
+
+            add();
+            init();
+        </script>
+</body>
+</html>
